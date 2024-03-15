@@ -4,7 +4,7 @@ from app.api.v1.serializers import NewsSerializer, CreateNewsSerializer, UpdateN
 from app.models import News
 
 
-class NewsListCreateAPIView(mixins.ListModelMixin, mixins.CreateModelMixin,  generics.GenericAPIView):
+class NewsListAPIView(mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView):
     queryset = News.objects.all()
     serializer_class = NewsSerializer
     filter_backends = [filters.SearchFilter]
@@ -13,19 +13,24 @@ class NewsListCreateAPIView(mixins.ListModelMixin, mixins.CreateModelMixin,  gen
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
 
-    def post(self, request, *args, **kwargs):
-        return self.create(request, *args, **kwargs)
-
 
 class NewsDeleteRetrieveAPIView(mixins.DestroyModelMixin, mixins.RetrieveModelMixin, generics.GenericAPIView):
     queryset = News.objects.all()
-    serializer_class = CreateNewsSerializer
+    serializer_class = NewsSerializer
 
     def get(self, request, *args, **kwargs):
         return self.retrieve(request, *args, **kwargs)
 
     def delete(self, request, *args, **kwargs):
         return self.destroy(request, *args, **kwargs)
+
+
+class CreateAPIView(mixins.CreateModelMixin, generics.GenericAPIView):
+    queryset = News.objects.all()
+    serializer_class = NewsSerializer
+
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
 
 
 class NewsUpdateView(mixins.UpdateModelMixin, generics.GenericAPIView):
