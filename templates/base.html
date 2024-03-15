@@ -1,0 +1,52 @@
+    {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <meta charset="UTF-8">
+    <title>{% block title %}Kun.uz{% endblock %}</title>
+</head>
+<body>
+<header>
+
+    <div class="categories">
+        <a class="kunuz" href='{% url 'home' %}'> <strong> Kun.<span class="kun_uz">uz</span></strong> </a>
+        {% for category in categories %}
+            <a class="category" href="{% url 'categories_news' category.slug %}"> <strong>{{ category.name }}</strong>
+            </a>
+        {% endfor %}
+    </div>
+
+
+    <div class="regions">
+        <label class="hudud"> Hududlar </label>
+
+        {% for region in regions %}
+            <a class="region" href="{% url 'regions_news' region.slug %}"> {{ region.name }} </a> 
+        {% endfor %}
+    </div>
+    <br>
+    <br>
+
+
+
+  <div class="news ">
+    {% for new in news %}
+        <div class="new">
+            <a href="{% url 'full_new' new.slug %}" > <h2>{{ new.title }}</h2> </a>
+            <p>{{ new.description }}</p>
+            {{ new.join_date }}
+            {% if new.image %}
+            <img src="{{ new.image.url }}">
+        {% endif %}
+        </div>
+    {% endfor %}
+  </div>
+
+
+    {% block content %}
+    {% endblock %}
+
+</header>
+</body>
+</html>

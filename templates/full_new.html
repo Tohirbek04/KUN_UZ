@@ -1,0 +1,24 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+       <link rel="stylesheet" href="{% static 'css/full_new.css' %}">
+    
+    <title>{{ new.title }}</title>
+    
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<header>
+    <div class="full_new">
+        <h2>{{ new.title }}</h2>
+        <p>{{ new.description }}</p>
+        <p>{{ new.join_date }}</p>
+        {% if new.image %}
+            <img src="{{ new.image.url }}">
+        {% endif %}
+    </div>
+</header>
+</body>
+</html>
