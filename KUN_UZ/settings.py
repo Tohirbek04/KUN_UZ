@@ -10,7 +10,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
+
 from pathlib import Path
+from dotenv import dotenv_values
+config = dotenv_values('.env')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,7 +27,7 @@ SECRET_KEY = 'django-insecure-v!udrb9^q@$b4i9-q+1q9$3_yff&i!zx47e^q9h^qqi7)_k1@l
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 # Application definition
 
@@ -82,8 +85,12 @@ MEDIA_ROOT = BASE_DIR / 'media/'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': config['NAME'],
+        'USER':config['USER'],
+        'PASSWORD':config['PASSWORD'],
+        'HOST':config['HOST'],
+        'PORT':config['PORT']
     }
 }
 
