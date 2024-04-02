@@ -7,7 +7,7 @@ services:
     expose:
       - 8000
     volumes:
-      - media_file:app/media
+      - media_file:/app/media
     depends_on:
       - db
 
