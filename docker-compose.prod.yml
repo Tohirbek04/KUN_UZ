@@ -7,7 +7,7 @@ services:
     expose:
       - 8000
     volumes:
-      - media_file
+      - media_file:app/media
     depends_on:
       - db
 
@@ -15,6 +15,7 @@ services:
     image: postgres:16
     env_file:
       - .prod.db.env
+
   nginx:
     build: ./nginx
     depends_on:
