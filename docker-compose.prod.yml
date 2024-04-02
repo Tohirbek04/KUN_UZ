@@ -8,6 +8,7 @@ services:
       - 8000
     volumes:
       - media_file:/app/media
+      - static_file:/app/static
     depends_on:
       - db
 
@@ -15,13 +16,21 @@ services:
     image: postgres:16
     env_file:
       - .prod.db.env
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
 
   nginx:
     build: ./nginx
     ports:
       - 80:80
+    volumes:
+      - media_file:/app/media
+      - static_file:/app/static
     depends_on:
       - web
 
 volumes:
   media_file:
+  static_file:
+  pgdata:
